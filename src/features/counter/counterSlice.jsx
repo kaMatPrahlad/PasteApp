@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import toast from "react-hot-toast";
 
 const initialState = {
   pastes: localStorage.getItem("pastes")
@@ -10,7 +11,12 @@ export const counterSlice = createSlice({
   name: "paste",
   initialState,
   reducers: {
-    addToPastes: (state, action) => {},
+    addToPastes: (state, action) => {
+      const paste = action.payload;
+      state.pastes.push(paste);
+      localStorage.setItem("Pastes", state.pastes);
+      toast("Paste Created Successfully");
+    },
     updatesToPastes: (state, action) => {},
     resetAllPastes: (state, action) => {},
     removeFromPastes: (state, action) => {},
@@ -19,7 +25,7 @@ export const counterSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const {
-  incaddToPastes,
+  addToPastes,
   updatesToPastes,
   resetAllPastes,
   removeFromPastes,

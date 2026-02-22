@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { updatesToPastes } from "../features/counter/counterSlice";
+import { useDispatch } from "react-redux";
 
 const Home = () => {
   const [title, setTitle] = useState("");
@@ -18,10 +19,10 @@ const Home = () => {
 
     if (pasteId) {
       //Update
-      dispatch(updatesToPastes(paste));
+      useDispatch(updatesToPastes(paste));
     } else {
       //Create
-      dispatch(addToPastes(paste));
+      useDispatch(addToPastes(paste));
     }
     //After Creation or Updation
     setTitle("");
