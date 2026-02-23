@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { updatesToPastes } from "../features/counter/counterSlice";
+import { addToPastes, updatesToPastes } from "../features/counter/counterSlice";
 import { useDispatch } from "react-redux";
 
 const Home = () => {
@@ -8,6 +8,8 @@ const Home = () => {
   const [value, setValue] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
   const pasteId = searchParams.get("pasteId");
+
+  const dispatch = useDispatch(); // ✅ Correct place
 
   function createPaste() {
     const paste = {
@@ -19,10 +21,10 @@ const Home = () => {
 
     if (pasteId) {
       //Update
-      useDispatch(updatesToPastes(paste));
+      dispatch(updatesToPastes(paste));
     } else {
       //Create
-      useDispatch(addToPastes(paste));
+      dispatch(addToPastes(paste));
     }
     //After Creation or Updation
     setTitle("");

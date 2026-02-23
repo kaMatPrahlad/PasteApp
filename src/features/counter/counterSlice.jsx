@@ -14,7 +14,7 @@ export const counterSlice = createSlice({
     addToPastes: (state, action) => {
       const paste = action.payload;
       state.pastes.push(paste);
-      localStorage.setItem("Pastes", state.pastes);
+      localStorage.setItem("Pastes", JSON.stringify(state.pastes));
       toast("Paste Created Successfully");
     },
     updatesToPastes: (state, action) => {},
