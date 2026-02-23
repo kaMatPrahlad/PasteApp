@@ -17,9 +17,33 @@ export const counterSlice = createSlice({
       localStorage.setItem("Pastes", JSON.stringify(state.pastes));
       toast("Paste Created Successfully");
     },
-    updatesToPastes: (state, action) => {},
-    resetAllPastes: (state, action) => {},
-    removeFromPastes: (state, action) => {},
+    updatesToPastes: (state, action) => {
+      const paste = action.payload;
+      const index = state.pastes.findIndex((item) => item._id === paste._id);
+      if (index >= 0) {
+        state.pastes[index] = paste;
+        localStorage.setItem("paste", JSON.stringify(state.pastes));
+        toast.success("Paste updated");
+      }
+    },
+    resetAllPastes: (state, action) => {
+      state.pastes = [];
+
+      localStorage.removeItem("pastes");
+    },
+    removeFromPastes: (state, action) => {
+      const pasteId = action.payload;
+
+      console.log(pasteId);
+      const index = state.pastes.findIndex((item) => item._id === pasteId);
+
+      if (index >= 0) {
+        state.pastes.splice(index, 1);
+
+        localStorage.setItem("pastes", JSON.stringify(state.pastes));
+      }
+      toast.success("Paste deleted");
+    },
   },
 });
 
