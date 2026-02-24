@@ -1,7 +1,10 @@
 import React from "react";
 
 const Paste = () => {
-  return <div>Paste</div>;
+  return <div>
+
+    
+  </div>;
 };
 
 export default Paste;
